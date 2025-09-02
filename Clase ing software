@@ -1,0 +1,44 @@
+import java.util.Scanner;
+
+public class Exception1 {
+	public static void verificar(int verif, int digitoVerif) {
+		if (verif != digitoVerif) {
+			throw new IllegalArgumentException("Ta malo el rut"); //las funciones solo verifican si las cosas estan bien
+																  //solo van verificando el error, 1 funcion para cada exception
+			} 
+	}
+		public static void main(String[] args) {
+			
+			Scanner scan = new Scanner(System.in);
+			int acumulado = 0;
+
+			System.out.println("Ingrese el rut (xx.xxx.xxx-x): ");
+			String rut = scan.nextLine();
+			String[] identificador = rut.split("-");
+			String[] numeros = identificador[0].split("\\.");
+
+			acumulado += ((numeros[0].charAt(0) - '0') * 3);
+			acumulado += ((numeros[0].charAt(1) - '0') * 2);
+			acumulado += ((numeros[1].charAt(0) - '0') * 7);
+			acumulado += ((numeros[1].charAt(1) - '0') * 6);
+			acumulado += ((numeros[1].charAt(2) - '0') * 5);
+			acumulado += ((numeros[2].charAt(0) - '0') * 4);
+			acumulado += ((numeros[2].charAt(1) - '0') * 3);
+			acumulado += ((numeros[2].charAt(2) - '0') * 2);
+
+			int resto = acumulado % 11;
+			int verif = 11 - resto;
+			int digitoVerif = Integer.valueOf(identificador[1]); 
+			
+			try {												//el try catch siempre va en el main
+				verificar(verif, digitoVerif);
+				System.out.println("Esta bueno :3");
+			} catch (IllegalArgumentException e){
+				System.out.println(e.getMessage());
+			} finally {
+				System.out.println("Gracias por verificar tu rut :3");
+			}
+			
+			scan.close();	
+			}
+		}
