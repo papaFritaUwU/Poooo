@@ -1,0 +1,28 @@
+import java.util.Scanner;
+
+public class Holauwu {
+	
+	public static double dividir (double a, double b) {
+		if (b == 0) { 
+			throw new ArithmeticException("No podi dividir por 0");
+		}
+		
+		return a / b;
+	}
+	
+	public static void main(String[] args) {
+		Scanner scan = new Scanner(System.in);
+		System.out.println("Ingrese un num");
+		double num1 = Double.valueOf(scan.nextLine());
+		System.out.println("Ingrese otro num");
+		double num2 = Double.valueOf(scan.nextLine());
+		try {
+			System.out.println(dividir(num1, num2));
+		} catch (ArithmeticException e){
+			System.out.println(e.getMessage());
+		}
+		
+		scan.close();
+	}
+
+}
